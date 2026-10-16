@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="theme-color" content="#111111">
+<title>GUPTA JI BURGER CENTRE</title>
+<style>
+:root{--yellow:#ffbf00;--black:#111;--cream:#fff8e8;--muted:#666}
+*{box-sizing:border-box}body{margin:0;font-family:Arial,Helvetica,sans-serif;background:#fff;color:#171717}
+header{background:var(--black);color:#fff;padding:18px 5%;display:flex;align-items:center;justify-content:space-between;gap:14px;flex-wrap:wrap;border-bottom:4px solid var(--yellow)}
+.brand{display:flex;align-items:center;gap:12px}.logo{width:54px;height:54px;border:2px solid var(--yellow);border-radius:50%;display:grid;place-items:center;font-size:28px}.brand h1{font-size:clamp(18px,3vw,27px);margin:0}.brand span{color:var(--yellow)}header a{color:#111;background:var(--yellow);text-decoration:none;padding:11px 16px;border-radius:9px;font-weight:bold}
+.hero{background:linear-gradient(100deg,#171717ed,#17171788),linear-gradient(135deg,#362000,#111);color:white;padding:52px 6%;display:grid;grid-template-columns:1.2fr .8fr;gap:20px;align-items:center}
+.hero h2{font-size:clamp(32px,6vw,56px);margin:0 0 12px;line-height:1.05}.hero h2 span{color:var(--yellow)}.hero p{font-size:18px;line-height:1.5;color:#f5e8c8}.hero .food{font-size:clamp(70px,12vw,130px);text-align:center;filter:drop-shadow(0 8px 10px #0008)}
+.btn{border:0;background:var(--yellow);color:#111;font-weight:bold;padding:12px 16px;border-radius:9px;cursor:pointer;text-decoration:none;display:inline-block}
+main{max-width:1100px;margin:auto;padding:28px 18px}.section-title{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}.section-title h2{margin:0 0 6px;font-size:28px}.sub{color:var(--muted);margin:0 0 22px}
+.tabs{display:flex;gap:8px;margin:18px 0;flex-wrap:wrap}.tab{border:1px solid #ddd;background:#fff;padding:10px 16px;border-radius:20px;cursor:pointer}.tab.active{background:var(--black);color:var(--yellow);border-color:var(--black)}
+.grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:16px}.item{border:1px solid #eee;border-radius:16px;overflow:hidden;box-shadow:0 4px 15px #0000000a;background:white;display:flex;flex-direction:column}.photo{background:var(--cream);height:130px;display:grid;place-items:center;font-size:70px}.info{padding:15px;display:flex;flex-direction:column;flex:1}.info h3{font-size:17px;margin:0 0 8px}.price-row{display:flex;align-items:center;justify-content:space-between;margin-top:auto;padding-top:14px}.price{font-size:20px;font-weight:bold}.add{background:var(--yellow);border:0;border-radius:8px;padding:10px 12px;font-weight:bold;cursor:pointer}
+.cart{margin-top:30px;background:#fff8e8;border:1px solid #f0dfa9;padding:20px;border-radius:16px}.cart h2{margin-top:0}.cart-row{display:flex;justify-content:space-between;gap:10px;padding:10px 0;border-bottom:1px solid #eadfbe;align-items:center}.qty button{border:1px solid #ccc;background:white;border-radius:6px;padding:4px 9px;cursor:pointer}.total{display:flex;justify-content:space-between;font-size:21px;font-weight:bold;padding:16px 0}.empty{color:#666}
+input[type="text"],input[type="url"]{display:block;width:100%;max-width:480px;padding:12px;border:1px solid #ccc;border-radius:8px;margin:7px 0 10px;font:inherit}.pay-option{display:flex;gap:9px;align-items:center;padding:10px 0}.payment-fields{margin:12px 0;padding:13px;background:#fff;border:1px solid #eadfbe;border-radius:10px;max-width:600px}.payment-fields small{display:block;color:#666;line-height:1.4}.payment-fields[hidden]{display:none}footer{background:#111;color:#fff;padding:24px 5%;text-align:center}footer strong{color:var(--yellow)}footer p{margin:7px}
+@media(max-width:720px){.hero{grid-template-columns:1fr;padding:38px 6%}.hero .food{display:none}.grid{grid-template-columns:repeat(2,minmax(0,1fr))}.photo{height:105px;font-size:58px}.brand h1{max-width:230px}}
+@media(max-width:430px){.grid{grid-template-columns:1fr 1fr;gap:10px}.info{padding:11px}.info h3{font-size:14px}.photo{height:90px;font-size:48px}.add{padding:9px 8px;font-size:12px}.price{font-size:17px}}
+</style>
+</head>
+<body>
+<header>
+  <div class="brand"><div class="logo">🍔</div><h1>GUPTA JI <span>BURGER CENTRE</span></h1></div>
+  <a href="#menu">Order Now</a>
+</header>
+<section class="hero">
+  <div><h2>Tasty Burgers.<br><span>Fresh & Hot.</span></h2><p>Burgers • Momos • Happiness<br>Made with care in Faridabad.</p><a class="btn" href="#menu">Explore Menu ↓</a></div>
+  <div class="food" aria-label="Burger and fries">🍔 🍟</div>
+</section>
+<main id="menu">
+  <div class="section-title"><h2>Our Menu</h2><span>💛 Fresh • Tasty • Affordable</span></div>
+  <p class="sub">Choose your favourites, add them to your cart, then send your order on WhatsApp.</p>
+  <div class="tabs"><button class="tab active" data-filter="all">All Items</button><button class="tab" data-filter="burger">Burgers</button><button class="tab" data-filter="momos">Momos</button></div>
+  <div class="grid" id="products"></div>
+  <section class="cart" id="cart">
+    <h2>🛒 Your Cart</h2><div id="cart-items"><p class="empty">Your cart is empty. Add something tasty!</p></div>
+    <div class="total"><span>Total</span><span id="total">₹0</span></div>
+    <h3>Choose payment method</h3>
+    <label class="pay-option"><input type="radio" name="payment" value="upi" checked> UPI (Google Pay / PhonePe / Paytm)</label>
+    <label class="pay-option"><input type="radio" name="payment" value="gateway"> Online payment gateway (cards / UPI)</label>
+    <label class="pay-option"><input type="radio" name="payment" value="cod"> Cash on delivery / pay on pickup</label>
+    <div id="upi-fields" class="payment-fields">
+      <label for="upi-id">Your business UPI ID (required for UPI payment)</label>
+      <input id="upi-id" type="text" placeholder="e.g. yourname@bank" autocomplete="off">
+      <small>Enter the UPI ID that belongs to your business. Do not enter your UPI PIN.</small>
+    </div>
+    <div id="gateway-fields" class="payment-fields" hidden>
+      <p><strong>Gateway setup required.</strong> Paste a payment link generated from your approved payment provider.</p>
+      <label for="gateway-url">Payment gateway link</label>
+      <input id="gateway-url" type="url" placeholder="https://...">
+      <small>This prototype cannot verify payment status automatically. Do not use a generic link unless it matches the order amount.</small>
+    </div>
+    <button class="btn" id="checkout">Continue to Payment / WhatsApp</button>
+    <p class="sub" style="margin:12px 0 0;font-size:13px">For UPI or gateway payments, confirm the payment in your merchant account before treating an order as paid. Cash orders are marked as pay on delivery/pickup.</p>
+  </section>
+</main>
+<footer><p><strong>GUPTA JI BURGER CENTRE</strong></p><p>📍 Sector 15, Faridabad</p><p>📲 WhatsApp: 9584959135</p><p>Burgers • Momos • Happiness</p></footer>
+<script>
+const products=[
+{id:1,name:"Paneer Cream Burger",price:30,cat:"burger",emoji:"🍔"},
+{id:2,name:"Paneer Cream Butter Burger",price:35,cat:"burger",emoji:"🍔"},
+{id:3,name:"Paneer Cream Cheese Burger",price:40,cat:"burger",emoji:"🍔"},
+{id:4,name:"Paneer Cream Butter Cheese Burger",price:45,cat:"burger",emoji:"🍔"},
+{id:5,name:"Paneer Cream Double Cheese Burger",price:50,cat:"burger",emoji:"🍔"},
+{id:6,name:"Paneer Cream Double Cheese Butter Burger",price:60,cat:"burger",emoji:"🍔"},
+{id:7,name:"Momos — Half Plate",price:30,cat:"momos",emoji:"🥟"},
+{id:8,name:"Momos — Full Plate",price:60,cat:"momos",emoji:"🥟"}];
+const cart={};let filter="all";
+const productsEl=document.getElementById("products");
+function renderProducts(){productsEl.innerHTML="";products.filter(p=>filter==="all"||p.cat===filter).forEach(p=>{const el=document.createElement("article");el.className="item";el.innerHTML=`<div class="photo">${p.emoji}</div><div class="info"><h3>${p.name}</h3><div class="price-row"><span class="price">₹${p.price}</span><button class="add" data-id="${p.id}">+ Add</button></div></div>`;productsEl.appendChild(el)});}
+function renderCart(){const el=document.getElementById("cart-items");const items=products.filter(p=>cart[p.id]);if(!items.length){el.innerHTML='<p class="empty">Your cart is empty. Add something tasty!</p>'}else{el.innerHTML=items.map(p=>`<div class="cart-row"><span>${p.name}<br><strong>₹${p.price*cart[p.id]}</strong></span><span class="qty"><button data-change="-1" data-id="${p.id}">−</button> ${cart[p.id]} <button data-change="1" data-id="${p.id}">+</button></span></div>`).join("")}document.getElementById("total").textContent="₹"+items.reduce((s,p)=>s+p.price*cart[p.id],0)}
+productsEl.addEventListener("click",e=>{const b=e.target.closest("[data-id]");if(b){const id=+b.dataset.id;cart[id]=(cart[id]||0)+1;renderCart();}});
+document.getElementById("cart-items").addEventListener("click",e=>{const b=e.target.closest("[data-change]");if(b){const id=+b.dataset.id;cart[id]=(cart[id]||0)+ +b.dataset.change;if(cart[id]<=0)delete cart[id];renderCart()}});
+document.querySelectorAll(".tab").forEach(b=>b.addEventListener("click",()=>{filter=b.dataset.filter;document.querySelectorAll(".tab").forEach(t=>t.classList.toggle("active",t===b));renderProducts()}));
+const paymentRadios=[...document.querySelectorAll('input[name="payment"]')];
+function updatePaymentFields(){const choice=paymentRadios.find(r=>r.checked)?.value||"upi";document.getElementById("upi-fields").hidden=choice!=="upi";document.getElementById("gateway-fields").hidden=choice!=="gateway";}
+paymentRadios.forEach(r=>r.addEventListener("change",updatePaymentFields));updatePaymentFields();
+document.getElementById("checkout").addEventListener("click",()=>{
+ const items=products.filter(p=>cart[p.id]);
+ if(!items.length){alert("Please add at least one item to your cart first.");return;}
+ const total=items.reduce((s,p)=>s+p.price*cart[p.id],0);
+ const lines=items.map(p=>`${p.name} x ${cart[p.id]} = ₹${p.price*cart[p.id]}`);
+ const choice=paymentRadios.find(r=>r.checked)?.value||"upi";
+ let paymentText="";
+ if(choice==="upi"){
+   const upiId=document.getElementById("upi-id").value.trim();
+   if(!upiId||!upiId.includes("@")){alert("Please enter your business UPI ID first. If you don't have one, choose Cash on delivery or set up a merchant UPI ID with your bank/payment provider.");return;}
+   const upiUrl="upi://pay?pa="+encodeURIComponent(upiId)+"&pn="+encodeURIComponent("GUPTA JI BURGER CENTRE")+"&am="+encodeURIComponent(total.toFixed(2))+"&cu=INR&tn="+encodeURIComponent("Food order");
+   paymentText="Payment method: UPI (payment must be confirmed by the shop)";
+   const proceed=confirm("This will open a UPI app to pay ₹"+total+". Only continue if this UPI ID is yours and correct. After payment, return and send the order on WhatsApp. The website cannot verify payment automatically.");
+   if(!proceed)return;
+   window.location.href=upiUrl;
+ } else if(choice==="gateway"){
+   const url=document.getElementById("gateway-url").value.trim();
+   if(!url||!/^https:\/\//i.test(url)){alert("Enter a valid HTTPS payment link from your approved payment gateway. Gateway onboarding is required first.");return;}
+   paymentText="Payment method: Online payment gateway (shop must verify payment)";
+   window.open(url,"_blank","noopener");
+ } else {
+   paymentText="Payment method: Cash on delivery / pickup";
+ }
+ const message=`Hello GUPTA JI BURGER CENTRE! I would like to order:\n${lines.join("\n")}\nTotal: ₹${total}\n${paymentText}\nPlease confirm my order.`;
+ setTimeout(()=>window.open("https://wa.me/919584959135?text="+encodeURIComponent(message),"_blank"),choice==="upi"?700:250);
+});
+renderProducts();renderCart();
+</script>
+</body>
+</html>
